@@ -6,7 +6,11 @@ module.exports = {
   getUsers,
   getUser,
   addUser,
-  updateUser
+  updateUser,
+  getHobbies,
+  getHobby,
+  addHobby,
+  updateHobby
 }
 
 function getUsers (testDb) {
@@ -25,4 +29,24 @@ function addUser (data, db = connection) {
 
 function updateUser (id, user, db = connection) {
   return db('users').where('id', id).update(user)
+}
+
+// Hobbies
+
+function getHobbies (testDb) {
+  const db = testDb || connection
+  return db('activities').select()
+}
+
+function getHobby (id, testDb) {
+  const db = testDb || connection
+  return db('activities').where('id', id).first()
+}
+
+function addHobby (data, db = connection) {
+  return db('activities').insert(data)
+}
+
+function updateHobby (id, user, db = connection) {
+  return db('activities').where('id', id).update(user)
 }
