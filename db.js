@@ -10,16 +10,15 @@ module.exports = {
   getHobbies,
   getHobby,
   addHobby,
-  updateHobby
+  updateHobby,
+  deleteHobby
 }
 
-function getUsers (testDb) {
-  const db = testDb || connection
+function getUsers (db = connection) {
   return db('users').select()
 }
 
-function getUser (id, testDb) {
-  const db = testDb || connection
+function getUser (id, db = connection) {
   return db('users').where('id', id).first()
 }
 
@@ -33,13 +32,11 @@ function updateUser (id, user, db = connection) {
 
 // Hobbies
 
-function getHobbies (testDb) {
-  const db = testDb || connection
+function getHobbies (db = connection) {
   return db('activities').select()
 }
 
-function getHobby (id, testDb) {
-  const db = testDb || connection
+function getHobby (id, db = connection) {
   return db('activities').where('id', id).first()
 }
 
@@ -49,4 +46,8 @@ function addHobby (data, db = connection) {
 
 function updateHobby (id, user, db = connection) {
   return db('activities').where('id', id).update(user)
+}
+
+function deleteHobby (id, db = connection) {
+  return db('activities').where('id', id).del(id)
 }
