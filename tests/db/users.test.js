@@ -31,3 +31,23 @@ test('getUser gets a user by ID', () => {
     })
 })
 
+test('addUser adds a user', () => {
+  const data = {name: 'Carel'}
+  const expected = 'Carel'
+  return db.addUser(data, testDb)
+    .then(user => {
+      const actual = data.name
+      expect(actual).toBe(expected)
+    })
+})
+
+test('updateUser updates a user', () => {
+  const data = {name: 'Jeremy', email: 'jeremy@email'}
+  const id = 99929
+  const expected = 'Jeremy'
+  return db.updateUser(id, data, testDb)
+    .then(user => {
+      const actual = data.name
+      expect(actual).toBe(expected)
+    })
+})

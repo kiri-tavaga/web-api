@@ -25,5 +25,27 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.post('/add', (req, res) => {
+  const data = {name: 'Chris', email: 'chris@email'}
+  db.addUser(data)
+    .then(user => {
+      res.json({user})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
+router.post('/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const data = {name: 'Dani', email: 'dani@email'}
+  db.updateUser(id, data)
+    .then(user => {
+      res.json({user: user})
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
 module.exports = router
 
